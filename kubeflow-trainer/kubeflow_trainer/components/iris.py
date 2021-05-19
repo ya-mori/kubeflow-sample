@@ -1,9 +1,12 @@
+import os
+from pathlib import Path
+
 import tensorflow as tf
 
 
 def main():
-    train_dataset = load('../data/02_features/iris/train.tfrecord')
-    test_dataset = load('../data/02_features/iris/test.tfrecord')
+    train_dataset = load(os.getenv("TRAIN_TFRECORD_DIR_IRIS", "../data/02_features/iris/train.tfrecord"))
+    test_dataset = load(os.getenv("TEST_TFRECORD_DIR_IRIS", "../data/02_features/iris/train.tfrecord"))
 
     model = tf.keras.Sequential([
         tf.keras.layers.Dense(10, activation=tf.nn.relu, input_shape=(1, 1)),
@@ -20,12 +23,14 @@ def main():
 
     model.fit(
         train_dataset,
-        epochs=1,
-        #     validation_data=validation_dataset,
-        #     callbacks=callbacks,
+        epochs=10,
     )
     print(model.evaluate(test_dataset))
-    model.save(filepath="../data/03_models/iris.h5", save_format="h5")
+    model_path = os.getenv("MODEL_DIR_IRIS", "../data/03_models/iris.h5")
+    p_path = Path(model_path).parent
+    if not p_path.exists():
+        p_path.mkdir(parents=True)
+    model.save(filepath=model_path, save_format="h5")
 
 
 def load(path: str) -> tf.data.TFRecordDataset:

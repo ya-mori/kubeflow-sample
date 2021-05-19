@@ -55,7 +55,6 @@ def write(x_train, x_test, y_train, y_test):
 
     def serialize(features, target):
         def _serialize(_features, _target):
-            # print(_features, _target)
             feature = {
                 'petal_length': _float_feature(_features[0]),
                 'petal_width': _float_feature(_features[1]),
