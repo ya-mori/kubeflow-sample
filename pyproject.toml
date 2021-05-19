@@ -5,8 +5,11 @@ description = ""
 authors = ["ya-mori <ppap.yohei.moriya@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-kfp = "^1.4.0"
+python = "^3.9"
+jupyterlab = "^3.0.15"
+kubeflow-trainer = {path = "kubeflow-trainer"}
+kubeflow-pipeline = {path = "kubeflow-pipeline"}
+kubeflow-preprocessor = {path = "kubeflow-preprocessor"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -1,2 +1,8 @@
 .venv
 .idea
+*.tar.gz
+*.tfrecord
+*.h5
+.ipynb_checkpoints
+__pycache__
+data/*/*.yaml
