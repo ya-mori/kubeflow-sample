@@ -2,7 +2,6 @@ from typing import Callable
 
 from kubeflow_pipeline.pipelines.iris import iris_pipeline
 
-
 pipelines = dict(
     iris=iris_pipeline,
 )

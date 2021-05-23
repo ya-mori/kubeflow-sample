@@ -1,16 +1,15 @@
 import os
-from typing import Dict, Any
+from typing import Any, Dict
 
 import kfp
 from kfp.compiler import Compiler
-
 from kubeflow_pipeline.pipeline_registory import get_pipeline
 
 
 def compile_pipeline(name: str):
     Compiler().compile(
         pipeline_func=get_pipeline(name=name),
-        package_path=f"../data/11_kubeflow_files/{name}.yaml"
+        package_path=f"../data/11_kubeflow_files/{name}.yaml",
     )
 
 
@@ -22,5 +21,5 @@ def execute_pipeline(name: str, params: Dict[str, Any]):
         experiment_id=experiment.id,
         job_name=name,
         pipeline_package_path=f"../data/11_kubeflow_files/{name}.yaml",
-        params=params
+        params=params,
     )
