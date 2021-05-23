@@ -65,24 +65,24 @@ def write(x_train, x_test, y_train, y_test):
 
         tf_string = tf.py_function(
             _serialize,
-            (features, target),  # 上記の関数にこれらの引数を渡す
-            tf.string  # 戻り値の型は tf.string
+            (features, target),
+            tf.string
         )
-        return tf.reshape(tf_string, ())  # 結果はスカラー
+        return tf.reshape(tf_string, ())
 
     serialized_features_dataset_train = dataset_train.map(serialize)
     serialized_features_dataset_test = dataset_test.map(serialize)
 
-    train_path = os.getenv("TRAIN_TFRECORD_DIR_IRIS", "../data/02_features/iris/train.tfrecord")
+    train_path = os.getenv("TRAIN_TFRECORD_DIR_IRIS", "../data/02_features/iris/train/dataset.tfrecord")
     p_path = Path(train_path).parent
     if not p_path.exists():
         p_path.mkdir(parents=True)
     writer = tf.data.experimental.TFRecordWriter(train_path)
+    writer.write(serialized_features_dataset_train)
 
-    test_path = os.getenv("TEST_TFRECORD_DIR_IRIS", "../data/02_features/iris/test.tfrecord")
+    test_path = os.getenv("TEST_TFRECORD_DIR_IRIS", "../data/02_features/iris/test/dataset.tfrecord")
     p_path = Path(test_path).parent
     if not p_path.exists():
         p_path.mkdir(parents=True)
-    writer.write(serialized_features_dataset_train)
     writer = tf.data.experimental.TFRecordWriter(test_path)
     writer.write(serialized_features_dataset_test)

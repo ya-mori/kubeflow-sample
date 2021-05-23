@@ -1,12 +1,32 @@
 import os
+from argparse import Namespace, ArgumentParser
 from pathlib import Path
 
 import tensorflow as tf
 
 
+def command_args() -> Namespace:
+    parser = ArgumentParser()
+    parser.add_argument('--train_dir', type=str, required=False)
+    parser.add_argument('--test_dir', type=str, required=False)
+    return parser.parse_args()
+
+
 def main():
-    train_dataset = load(os.getenv("TRAIN_TFRECORD_DIR_IRIS", "../data/02_features/iris/train.tfrecord"))
-    test_dataset = load(os.getenv("TEST_TFRECORD_DIR_IRIS", "../data/02_features/iris/train.tfrecord"))
+    args = command_args()
+
+    if args.train_dir:
+        train_dir = args.train_dir
+    else:
+        train_dir = os.getenv("TRAIN_TFRECORD_DIR_IRIS", "../data/02_features/iris/train/dataset.tfrecord")
+
+    if args.test_dir:
+        test_dir = args.test_dir
+    else:
+        test_dir = os.getenv("TEST_TFRECORD_DIR_IRIS", "../data/02_features/iris/test/dataset.tfrecord")
+
+    train_dataset = load(train_dir)
+    test_dataset = load(test_dir)
 
     model = tf.keras.Sequential([
         tf.keras.layers.Dense(10, activation=tf.nn.relu, input_shape=(1, 1)),
