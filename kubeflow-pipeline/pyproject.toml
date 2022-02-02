@@ -6,7 +6,7 @@ authors = ["ya-mori <ppap.yohei.moriya@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-kfp = "^1.4.0"
+kfp = "^1.8.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

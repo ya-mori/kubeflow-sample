@@ -7,9 +7,9 @@ authors = ["ya-mori <ppap.yohei.moriya@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 jupyterlab = "^3.0.15"
-kubeflow-trainer = {path = "kubeflow-trainer"}
-kubeflow-pipeline = {path = "kubeflow-pipeline"}
-kubeflow-preprocessor = {path = "kubeflow-preprocessor"}
+kubeflow-trainer = {path = "kubeflow-trainer", develop = true}
+kubeflow-pipeline = {path = "kubeflow-pipeline", develop = true}
+kubeflow-preprocessor = {path = "kubeflow-preprocessor", develop = true}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
